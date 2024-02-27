@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  db:
+    image: docker.io/library/postgres:13-alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+
+  web:
+    build: .
+    userns_mode: keep-id
+    args:
+      USERNAME: ${USERNAME}
+      GROUPNAME: ${GROUPNAME}
+      USERID: ${USERID}
+      GROUPID: ${GROUPID}
+    depends_on:
+      - db
+    environment:
+      - TERMINFO=/etc/terminfo
+      - TERM=xterm-256color
+      - PGHOST=db
+      - DATABASE_URL=postgresql://db
+      - PGUSER=postgres
+      - PGPASSWORD=password
+      - APP_HOST=web
+      - PAGER=nothing
+    ports:
+     - "3000:3000"
+    volumes:
+     - .:/app/quotes:z
+volumes:
+  dbdata:
