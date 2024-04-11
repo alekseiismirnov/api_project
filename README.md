@@ -23,7 +23,7 @@ Edit `run_rails.sh` accordingly to your requirements.
 
 Run:
 ```sh
-podman-compose up --build-arg USERNAME=$(id -un) --build-arg GROUPNAME=$(id -gn) --build-arg USERID=$(id -u) --build-arg GROUPID=$(id -g)
+podman-compose up --build-arg USERNAME=$(id -un) --build-arg GROUPNAME=$(id -gn) --build-arg USERID=$(id -u) --build-arg GROUPID=$(id -g) --build-arg APPDIR=${PWD##*/}
 ```
 If there is no rails application in current directory, it will be created. Name will be the same as the dir's name.
 Username and user id of the app files owner inside the container will be the same as a local user. All gems will be installed to user's home dir. 

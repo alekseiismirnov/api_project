@@ -25,19 +25,19 @@ ARG USERNAME
 ARG GROUPNAME
 ARG USERID
 ARG GROUPID
+ARG APPDIR
 
 COPY run_rails.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/run_rails.sh
 
-WORKDIR /app/quotes
+WORKDIR /app/$APPDIR
 
 RUN echo '***' && \
     addgroup -g $GROUPID $GROUPNAME && \
     adduser -S -u $USERID -G $GROUPNAME  -h /home/$USERNAME -s /bin/sh $USERNAME && \
     echo "$USERNAME     ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     mkdir -p /home/$USERNAME && \
-    mkdir -p /app/quotes && \
-    touch /app/quotes/trash.me && \
+    mkdir -p /app/$APPDIR && \
     echo "export PATH=$PATH:/home/$USERNAME/.local/share/gem/ruby/3.0.0/bin" >> /home/$USERNAME/.profile && \
     echo 'gem: --user-install --env-shebang --no-rdoc --no-ri' >> /home/$USERNAME/.gemrc && \
     chmod 700 /home/$USERNAME && \
