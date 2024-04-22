@@ -25,12 +25,11 @@ ARG USERNAME
 ARG GROUPNAME
 ARG USERID
 ARG GROUPID
-ARG APPDIR
 
 COPY run_rails.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/run_rails.sh
 
-WORKDIR /app/$APPDIR
+WORKDIR /app/api_project
 
 RUN echo '***' && \
     addgroup -g $GROUPID $GROUPNAME && \

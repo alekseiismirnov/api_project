@@ -19,14 +19,15 @@ Perhaps it would be better to make one image, but there are already redy to use 
 
 ## Operation
 
-Edit `run_rails.sh` accordingly to your requirements.  
+Edit `run_rails.sh` accordingly to your requirements. Containers app dir will be in the '/app' folder. 
+To change its name from the `api_project` to the prefered, change it in `Dockerfile` and `podman-compose.yml'.
 
 Run:
 ```sh
-podman-compose up --build-arg USERNAME=$(id -un) --build-arg GROUPNAME=$(id -gn) --build-arg USERID=$(id -u) --build-arg GROUPID=$(id -g) --build-arg APPDIR=${PWD##*/}
+podman-compose up --build-arg USERNAME=$(id -un) --build-arg GROUPNAME=$(id -gn) --build-arg USERID=$(id -u) --build-arg GROUPID=$(id -g) 
 ```
-If there is no rails application in current directory, it will be created. Name will be the same as the dir's name.
-Username and user id of the app files owner inside the container will be the same as a local user. All gems will be installed to user's home dir. 
+If there is no rails application in current directory, it will be created. 
+Username and user id of the app files owner inside the container will be the same as a local user. All gems will be installed to user's home dir in the container. 
 
 Get a shell inside the container:
 

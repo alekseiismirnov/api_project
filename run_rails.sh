@@ -1,8 +1,11 @@
 #!/bin/sh
-while ! pg_isready ; do sleep 10 ; echo " awating db" ; done 
+while ! pg_isready ; do sleep 10 ; echo " Awating for db..." ; done 
+
 source ~/.profile
+
 echo "*** Rails setup ***" 
 export WORKDIR=/app/$APPDIR
+
 if [ ! -x $WORKDIR/bin/rails ] 
 then
 	gem install --user-install rails -v 7.0.3.1
@@ -29,14 +32,17 @@ then
 	$WORKDIR/bin/bundle install 
 	$WORKDIR/bin/bundle exec spring binstub --all
 
-	$WORKDIR/bin/rails db:prepare
-	$WORKDIR/bin/rails db:test:prepare
 	$WORKDIR/bin/rails g rspec:install
 fi
 
+# do not work without it
 $WORKDIR/bin/bundle add spring --group "development, test" --skip-install 
 $WORKDIR/bin/bundle install
 $WORKDIR/bin/bundle exec spring binstub --all
+
+$WORKDIR/bin/rails db:prepare
+$WORKDIR/bin/rails db:development:prepare
+$WORKDIR/bin/rails db:test:prepare
 
 rm -fr $WORKDIR/tmp/pids/server.pid
 $WORKDIR/bin/rails s -b 0.0.0.0

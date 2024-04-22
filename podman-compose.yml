@@ -17,7 +17,6 @@ services:
       GROUPNAME: ${GROUPNAME}
       USERID: ${USERID}
       GROUPID: ${GROUPID}
-      APPDIR: ${APPDIR}
     depends_on:
       - db
     environment:
@@ -29,7 +28,7 @@ services:
       - PGPASSWORD=password
       - APP_HOST=web
       - PAGER=nothing
-      - APPDIR=$APPDIR
+      - APPDIR=api_project
     ports:
      - "3000:3000"
     volumes:
