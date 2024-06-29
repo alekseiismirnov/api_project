@@ -39,3 +39,10 @@ Shutdown
 ```sh
 podman-compose down
 ```
+### Why do not use podman compose?
+
+see https://github.com/containers/podman/issues/18580
+https://github.com/containers/podman-compose/issues/654
+esp. https://github.com/containers/podman-compose/issues/654#issuecomment-1501109702
+
+

@@ -1,17 +1,17 @@
 version: '3.8'
 services:
   db:
-    image: docker.io/library/postgres:13-alpine
+    image: docker.io/library/postgres:13
+    restart: always 
+    user: postgres
     environment:
       - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=lesha
+      - POSTGRESQL_DIRECTORY=/home/lesha
     ports:
       - "5432:5432"
-    volumes:
-      - "dbdata:/var/lib/postgresql/data"
-
   web:
     build: .
-    userns_mode: keep-id
     args:
       USERNAME: ${USERNAME}
       GROUPNAME: ${GROUPNAME}
@@ -33,5 +33,3 @@ services:
      - "3000:3000"
     volumes:
      - .:/app/api_project:z
-volumes:
-  dbdata:
