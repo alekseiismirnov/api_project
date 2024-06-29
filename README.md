@@ -24,7 +24,7 @@ To change its name from the `api_project` to the prefered, change it in `Dockerf
 
 Run:
 ```sh
-podman-compose up --build-arg USERNAME=$(id -un) --build-arg GROUPNAME=$(id -gn) --build-arg USERID=$(id -u) --build-arg GROUPID=$(id -g) 
+podman-compose --pod-args '--userns keep-id' up --build-arg USERNAME=$(id -un) --build-arg GROUPNAME=$(id -gn) --build-arg USERID=$(id -u) --build-arg GROUPID=$(id -g)
 ```
 If there is no rails application in current directory, it will be created. 
 Username and user id of the app files owner inside the container will be the same as a local user. All gems will be installed to user's home dir in the container. 
