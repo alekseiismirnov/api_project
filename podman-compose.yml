@@ -6,8 +6,7 @@ services:
     user: postgres
     environment:
       - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=lesha
-      - POSTGRESQL_DIRECTORY=/home/lesha
+      - POSTGRES_USER=postgres
     ports:
       - "5432:5432"
   web:
